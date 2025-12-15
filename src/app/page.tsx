@@ -1,65 +1,98 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useCallback } from 'react';
+import OmikujiBox from '@/components/OmikujiBox';
+import OmikujiResult from '@/components/OmikujiResult';
+import { drawOmikuji, OmikujiResult as Result } from '@/lib/omikuji';
 
 export default function Home() {
+  const [result, setResult] = useState<Result | null>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
+  const handleDraw = useCallback(() => {
+    setIsDrawing(true);
+    setShowResult(false);
+    setResult(null);
+
+    // おみくじを引くアニメーション
+    setTimeout(() => {
+      const omikujiResult = drawOmikuji();
+      setResult(omikujiResult);
+      setIsDrawing(false);
+      
+      // 結果表示のディレイ
+      setTimeout(() => {
+        setShowResult(true);
+      }, 100);
+    }, 1500);
+  }, []);
+
+  const handleRetry = useCallback(() => {
+    setShowResult(false);
+    setResult(null);
+    // スクロールをトップに
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-white relative overflow-hidden">
+      {/* 背景装飾 */}
+      <div className="fixed inset-0 pointer-events-none">
+        {/* 装飾的なライン */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--red)] via-[var(--pink)] to-[var(--gold)]" />
+        
+        {/* 浮遊する装飾 */}
+        <div className="absolute bottom-32 left-8 text-3xl opacity-25 animate-float" style={{ animationDelay: '0s' }}>🌸</div>
+        <div className="absolute bottom-48 right-8 text-2xl opacity-25 animate-float" style={{ animationDelay: '0.5s' }}>✨</div>
+        <div className="absolute top-32 left-12 text-2xl opacity-20 animate-float" style={{ animationDelay: '1s' }}>💫</div>
+        <div className="absolute top-48 right-12 text-3xl opacity-20 animate-float" style={{ animationDelay: '1.5s' }}>🌟</div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12">
+        {/* ヘッダー */}
+        <header className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[var(--cream)] to-white border border-[var(--pink)]/20 shadow-sm mb-6">
+            <span className="text-lg">🎍</span>
+            <span className="text-sm text-[var(--red)] tracking-wider font-bold">新春特別版</span>
+            <span className="text-lg">🎍</span>
+          </div>
+          
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-wide">
+            <span className="text-gradient-festive">KAWARA版</span>
+            <br className="sm:hidden" />
+            <span className="text-[var(--foreground)]"> 2026年</span>
+            <br />
+            <span className="text-gradient-gold">おみくじ</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          
+          <p className="text-gray-500 text-sm sm:text-base max-w-md mx-auto leading-relaxed font-medium">
+            🎍 新年のおみくじで運試し！ 🎍
+            <br />
+            2026年のあなたの運勢を占おう
           </p>
+        </header>
+
+        {/* メインコンテンツ */}
+        <div className="flex flex-col items-center justify-center min-h-[50vh]">
+          {!showResult ? (
+            <OmikujiBox onDraw={handleDraw} isDrawing={isDrawing} />
+          ) : (
+            result && <OmikujiResult result={result} onRetry={handleRetry} />
+          )}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        {/* フッター */}
+        <footer className="mt-16 sm:mt-20 text-center">
+          <div className="inline-flex items-center gap-3 text-gray-400 text-xs bg-gray-50 px-4 py-2 rounded-full font-medium">
+            <span>🎍</span>
+            <span>© 2025 KAWARA</span>
+            <span className="w-1 h-1 bg-[var(--pink)] rounded-full" />
+            <span>Happy New Year 2026</span>
+            <span>🎍</span>
+          </div>
+        </footer>
+      </div>
+    </main>
   );
 }
