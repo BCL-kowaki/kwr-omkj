@@ -53,7 +53,6 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
                 {result.rank}
               </h2>
             </div>
-            <p className="mt-3 text-gray-400 text-sm tracking-wider font-bold">YOUR FORTUNE 2026</p>
           </div>
 
           {/* 総合運メッセージ */}
@@ -155,8 +154,8 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
 
       {/* 免責事項 */}
       <p className="mt-8 text-center text-xs text-gray-400 leading-relaxed font-medium">
-        ※このおみくじはお遊び目的のエンターテインメントです。<br />
-        楽しんでいただければ幸いです 🌸
+        ※本おみくじはエンターテインメントを目的としたコンテンツです。<br />
+        結果は実際の運勢や投資判断を保証するものではございません。
       </p>
     </div>
   );

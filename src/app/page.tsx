@@ -52,11 +52,6 @@ export default function Home() {
       <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12">
         {/* ヘッダー */}
         <header className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[var(--cream)] to-white border border-[var(--pink)]/20 shadow-sm mb-6">
-            <span className="text-lg">🎍</span>
-            <span className="text-sm text-[var(--red)] tracking-wider font-bold">新春特別版</span>
-            <span className="text-lg">🎍</span>
-          </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-wide">
             <span className="text-gradient-festive">KAWARA版</span>
@@ -67,9 +62,7 @@ export default function Home() {
           </h1>
           
           <p className="text-gray-500 text-sm sm:text-base max-w-md mx-auto leading-relaxed font-medium">
-            🎍 新年のおみくじで運試し！ 🎍
-            <br />
-            2026年のあなたの運勢を占おう
+            🎍 2026年あなたの運勢は？ 🎍
           </p>
         </header>
 
@@ -86,9 +79,7 @@ export default function Home() {
         <footer className="mt-16 sm:mt-20 text-center">
           <div className="inline-flex items-center gap-3 text-gray-400 text-xs bg-gray-50 px-4 py-2 rounded-full font-medium">
             <span>🎍</span>
-            <span>© 2025 KAWARA</span>
-            <span className="w-1 h-1 bg-[var(--pink)] rounded-full" />
-            <span>Happy New Year 2026</span>
+            <span>© 2025 投資の"KAWARA"版.com</span>
             <span>🎍</span>
           </div>
         </footer>
