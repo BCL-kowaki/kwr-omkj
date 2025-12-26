@@ -39,16 +39,16 @@ export default function OmikujiBox({ onDraw, isDrawing }: OmikujiBoxProps) {
         onClick={!isDrawing ? onDraw : undefined}
       >
         {/* 箱本体 */}
-        <div className="relative w-52 h-68 sm:w-60 sm:h-80">
+        <div className="relative w-62 h-76 sm:w-80 sm:h-80">
           {/* 背面の光 */}
           <div
-            className={`absolute inset-0 bg-gradient-to-t from-[var(--pink)]/15 via-[var(--gold)]/10 to-transparent rounded-2xl blur-2xl transition-opacity duration-300 ${
+            className={`absolute inset-0 bg-gradient-to-t from-[var(--pink)]/15 via-[var(--gold)]/10 to-transparent rounded-[3px] blur-2xl transition-opacity duration-300 ${
               isHovered || isDrawing ? 'opacity-100' : 'opacity-50'
             }`}
           />
           
           {/* 箱の形状 */}
-          <div className="absolute inset-0 bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-[var(--pink)]/20">
+          <div className="absolute inset-0 bg-white rounded-[3px] overflow-hidden shadow-lg border-2 border-[var(--pink)]/20">
             {/* 上部のカラフルな帯 */}
             <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-r from-[var(--red)] via-[var(--pink)] to-[var(--gold)]">
               {/* 白の装飾ライン */}
@@ -71,9 +71,6 @@ export default function OmikujiBox({ onDraw, isDrawing }: OmikujiBoxProps) {
             {/* 口の部分 */}
             <div className="absolute top-16 left-1/2 -translate-x-1/2 w-14 h-5 bg-[var(--red-dark)] rounded-b-lg shadow-inner" />
             
-            {/* 側面の装飾 */}
-            <div className="absolute bottom-4 left-4 text-2xl opacity-50">🌸</div>
-            <div className="absolute bottom-4 right-4 text-2xl opacity-50">🌸</div>
           </div>
 
           {/* くじ棒のアニメーション */}

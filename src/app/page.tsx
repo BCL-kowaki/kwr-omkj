@@ -77,7 +77,7 @@ export default function Home() {
 
         {/* フッター */}
         <footer className="mt-16 sm:mt-20 text-center">
-          <div className="inline-flex items-center gap-3 text-gray-400 text-xs bg-gray-50 px-4 py-2 rounded-full font-medium">
+          <div className="inline-flex items-center gap-3 text-gray-400 text-xs bg-gray-50 px-4 py-2 rounded-[3px] font-medium">
             <span>🎍</span>
             <span>© 2025 投資の"KAWARA"版.com</span>
             <span>🎍</span>

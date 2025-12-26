@@ -14,15 +14,15 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
     <div className="w-full max-w-md mx-auto px-4 animate-slide-up">
       {/* 紙吹雪エフェクト */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {[...Array(15)].map((_, i) => (
+        {[7, 15, 23, 38, 52, 61, 74, 82, 91, 12, 28, 45, 67, 79, 95].map((pos, i) => (
           <div
             key={i}
             className="absolute text-2xl animate-confetti"
             style={{
-              left: `${Math.random() * 100}%`,
+              left: `${pos}%`,
               bottom: '-20px',
               animationDelay: `${i * 0.1}s`,
-              animationDuration: `${1 + Math.random()}s`,
+              animationDuration: `${1 + (i % 3) * 0.3}s`,
             }}
           >
             {['🎊', '✨', '🌸', '💫', '🎉'][i % 5]}
@@ -31,22 +31,19 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
       </div>
 
       {/* メインカード */}
-      <div className={`relative card-festive rounded-3xl overflow-hidden animate-pulse-festive`}>
-        {/* 上部の装飾帯 */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[var(--red)] via-[var(--pink)] to-[var(--gold)]" />
-
-        <div className="relative z-10 p-6 sm:p-8">
+      <div className={`relative bg-white rounded-[3px] border-1 border-[var(--pink)] overflow-hidden shadow-sm`}>
+        <div className="p-6 sm:p-8">
           {/* ヘッダー */}
           <div className="text-center mb-6">
             <div className="text-5xl mb-3">{decoration.emoji}</div>
-            <div className="inline-block px-5 py-2 rounded-full bg-white border-2 border-[var(--pink)]/20 shadow-sm">
+            <div className="inline-block px-5 py-2 rounded-[3px] bg-white border-2 border-[var(--pink)]/20 shadow-sm">
               <span className="text-xs text-[var(--red)] tracking-wider font-bold">🎍 KAWARA版 2026年 🎍</span>
             </div>
           </div>
 
           {/* 運勢ランク */}
           <div className="text-center mb-8">
-            <div className="inline-block bg-white rounded-2xl px-8 py-5 shadow-lg border-2 border-[var(--gold)]/30">
+            <div className="inline-block bg-white rounded-[3px] px-8 py-5 shadow-lg border-2 border-[var(--gold)]/30">
               <h2 
                 className={`text-5xl sm:text-6xl font-extrabold ${decoration.textColor} animate-reveal`}
               >
@@ -56,7 +53,7 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
           </div>
 
           {/* 総合運メッセージ */}
-          <div className="bg-white rounded-2xl p-5 mb-6 border border-[var(--pink)]/20 shadow-sm">
+          <div className="bg-white rounded-[3px] p-5 mb-6 border border-[var(--pink)]/20 shadow-sm">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-lg">🌟</span>
               <span className="text-sm text-[var(--red)] font-bold tracking-wider">総合運</span>
@@ -101,11 +98,11 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
               highlight
             />
             <div className="flex gap-3">
-              <div className="flex-1 bg-white rounded-xl p-3 border border-[var(--pink)]/15 shadow-sm">
+              <div className="flex-1 bg-white rounded-[3px] p-3 border border-[var(--pink)]/15 shadow-sm">
                 <p className="text-xs text-gray-500 mb-0.5 font-medium">🎨 ラッキーカラー</p>
                 <p className="text-[var(--foreground)] font-bold">{result.luckyColor}</p>
               </div>
-              <div className="flex-1 bg-white rounded-xl p-3 border border-[var(--pink)]/15 shadow-sm">
+              <div className="flex-1 bg-white rounded-[3px] p-3 border border-[var(--pink)]/15 shadow-sm">
                 <p className="text-xs text-gray-500 mb-0.5 font-medium">🔢 ラッキーナンバー</p>
                 <p className="text-[var(--foreground)] font-bold">{result.luckyNumber}</p>
               </div>
@@ -113,7 +110,7 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
           </div>
 
           {/* お金のヒント */}
-          <div className="mt-5 bg-gradient-to-r from-[var(--gold)]/10 to-[var(--gold)]/5 rounded-xl p-4 border border-[var(--gold)]/20">
+          <div className="mt-5 bg-gradient-to-r from-[var(--gold)]/10 to-[var(--gold)]/5 rounded-[3px] p-4 border border-[var(--gold)]/20">
             <p className="text-sm text-[var(--gold-dark)] leading-relaxed font-medium">
               {result.moneyHint}
             </p>
@@ -121,7 +118,7 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
 
           {/* 助言 */}
           <div className="mt-6 pt-6 border-t-2 border-dashed border-[var(--pink)]/30">
-            <div className="bg-gradient-to-r from-[var(--red)]/5 to-[var(--pink)]/5 rounded-xl p-4">
+            <div className="bg-gradient-to-r from-[var(--red)]/5 to-[var(--pink)]/5 rounded-[3px] p-4">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">💡</span>
                 <div>
@@ -134,9 +131,6 @@ export default function OmikujiResult({ result, onRetry }: OmikujiResultProps) {
             </div>
           </div>
         </div>
-
-        {/* 下部の装飾帯 */}
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-[var(--red)] via-[var(--pink)] to-[var(--gold)]" />
       </div>
 
       {/* アクションボタン */}
@@ -173,7 +167,7 @@ function DetailItem({
   highlight?: boolean;
 }) {
   return (
-    <div className={`flex items-start gap-3 p-3 rounded-xl ${
+    <div className={`flex items-start gap-3 p-3 rounded-[3px] ${
       highlight 
         ? 'bg-gradient-to-r from-[var(--gold)]/15 to-[var(--gold)]/5 border border-[var(--gold)]/25' 
         : 'bg-white border border-[var(--pink)]/15'
